@@ -25,16 +25,18 @@ public class GestionnaireCompteSingleton {
     public void init() {
         createAccounts();
     }
-    
-    public void createAccounts() {
-        CompteBancaire compte1 = new CompteBancaire("John Lennon", 150000);
-        CompteBancaire compte2 = new CompteBancaire("Paul McCartney", 950000);
-        CompteBancaire compte3 = new CompteBancaire("Ringo Starr", 20000);
-        CompteBancaire compte4 = new CompteBancaire("Georges Harrisson", 100000);
 
-        gCompte.creerCompte(compte1);        
-        gCompte.creerCompte(compte2);
-        gCompte.creerCompte(compte3);
-        gCompte.creerCompte(compte4);
+    public void createAccounts() {
+        if (gCompte.nbComptes() <= 0) {
+            CompteBancaire compte1 = new CompteBancaire("John Lennon", 150000);
+            CompteBancaire compte2 = new CompteBancaire("Paul McCartney", 950000);
+            CompteBancaire compte3 = new CompteBancaire("Ringo Starr", 20000);
+            CompteBancaire compte4 = new CompteBancaire("Georges Harrisson", 100000);
+
+            gCompte.creerCompte(compte1);
+            gCompte.creerCompte(compte2);
+            gCompte.creerCompte(compte3);
+            gCompte.creerCompte(compte4);
+        }
     }
 }

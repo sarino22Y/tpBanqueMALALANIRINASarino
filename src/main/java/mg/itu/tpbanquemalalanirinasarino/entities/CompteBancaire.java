@@ -9,12 +9,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 
 /**
  *
  * @author Ibonia
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "CompteBancaire.getAll", query = "SELECT c FROM CompteBancaire c"),
+    @NamedQuery(name = "CompteBancaire.getCount", query = "SELECT COUNT(c) FROM CompteBancaire c")})
 public class CompteBancaire implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -37,14 +37,22 @@ public class GestionnaireCompte {
     private EntityManager em;
 
     public List<CompteBancaire> getAllComptes() {
-        String s = "select c from CompteBancaire as c";
-        TypedQuery<CompteBancaire> query = em.createNamedQuery(s, CompteBancaire.class);
+        TypedQuery<CompteBancaire> query = em.createNamedQuery("CompteBancaire.getAll", CompteBancaire.class);
         List<CompteBancaire> liste = query.getResultList();
         return liste;
+    }
+
+    public CompteBancaire findById(Long id) {
+        return em.find(CompteBancaire.class, id);
     }
 
     public void creerCompte(CompteBancaire c) {
         em.persist(c);
     }
 
+    public int nbComptes() {
+        TypedQuery<Long> query = em.createNamedQuery("CompteBancaire.getCount", Long.class);
+        Long nb = query.getSingleResult();
+        return nb.intValue();
+    }
 }
