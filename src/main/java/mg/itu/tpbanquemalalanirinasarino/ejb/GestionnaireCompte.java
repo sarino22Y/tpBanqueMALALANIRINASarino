@@ -55,4 +55,16 @@ public class GestionnaireCompte {
         Long nb = query.getSingleResult();
         return nb.intValue();
     }
+    
+    public void transferer(CompteBancaire source, CompteBancaire destination,
+            int montant) {
+        source.retirer(montant);
+        destination.deposer(montant);
+        update(source);
+        update(destination);
+    }
+
+    public CompteBancaire update(CompteBancaire compteBancaire) {
+        return em.merge(compteBancaire);
+    }
 }

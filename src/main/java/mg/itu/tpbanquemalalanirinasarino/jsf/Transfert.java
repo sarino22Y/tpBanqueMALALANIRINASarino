@@ -7,7 +7,7 @@ package mg.itu.tpbanquemalalanirinasarino.jsf;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
-import mg.itu.tpbanquemalalanirinasarino.ejb.TransfertArgent;
+import mg.itu.tpbanquemalalanirinasarino.ejb.GestionnaireCompte;
 import mg.itu.tpbanquemalalanirinasarino.entities.CompteBancaire;
 
 /**
@@ -23,7 +23,7 @@ public class Transfert {
     private int montant;
 
     @EJB
-    private TransfertArgent transfert;
+    private GestionnaireCompte transfert;
 
     /**
      * Creates a new instance of TransfertArgent

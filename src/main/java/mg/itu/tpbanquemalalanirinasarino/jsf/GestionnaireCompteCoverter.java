@@ -39,5 +39,5 @@ public class GestionnaireCompteCoverter implements Converter<CompteBancaire> {
         }
         return compte.getId().toString();
     }
-
+    
 }

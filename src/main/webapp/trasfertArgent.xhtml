@@ -19,19 +19,18 @@
                         <h:inputText id="source" size="3" value="#{transfert.source}"
                                      required="true"
                                      converterMessage="L'id est un nombre entier"
-                                     />
+                                     converter="compteBancaireConverter"/>
                         <h:message for="source"/>
                         Id compte destination :
                         <h:inputText id="destination" size="3" value="#{transfert.destination}"
                                      required="true"
                                      converterMessage="L'id est un nombre entier"
-                                     />
+                                     converter="compteBancaireConverter"/>
                         <h:message for="destination"/>
                         Montant : 
                         <h:inputText id="montant" size="3" value="#{transfert.montant}"
                                      required="true"
-                                     converterMessage="Le montant est un nombre entier"
-                                     />
+                                     converterMessage="Le montant est un nombre entier"/>
                         <h:message for="montant"/>
                     </h:panelGrid>
                     <h:commandButton id="update" value="Valider" action="#{transfert.update()}"/>

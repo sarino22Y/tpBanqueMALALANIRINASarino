@@ -16,10 +16,10 @@ import jakarta.persistence.NamedQuery;
  *
  * @author Ibonia
  */
-@Entity
-@NamedQueries({
-    @NamedQuery(name = "CompteBancaire.getAll", query = "SELECT c FROM CompteBancaire c"),
-    @NamedQuery(name = "CompteBancaire.getCount", query = "SELECT COUNT(c) FROM CompteBancaire c")})
+    @Entity
+    @NamedQueries({
+        @NamedQuery(name = "CompteBancaire.getAll", query = "SELECT c FROM CompteBancaire c"),
+        @NamedQuery(name = "CompteBancaire.getCount", query = "SELECT COUNT(c) FROM CompteBancaire c")})
 public class CompteBancaire implements Serializable {
 
     private static final long serialVersionUID = 1L;
