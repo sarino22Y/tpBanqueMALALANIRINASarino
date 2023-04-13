@@ -9,7 +9,7 @@
         <ui:composition template="./WEB-INF/templates/template_defaut.xhtml">
 
             <ui:define name="top">
-                top
+                Transfert d'argent
             </ui:define>
 
             <ui:define name="content">
@@ -18,17 +18,17 @@
                         Id compte source :
                         <h:inputText id="source" size="3" value="#{transfert.source}"
                                      required="true"
-                                     converterMessage="L'id est un nombre entier"
-                                     converter="compteBancaireConverter"/>
+                                     converterMessage="L'id est un nombre entier"/>
                         <h:message for="source"/>
-
+                    </h:panelGrid>
+                    <h:panelGrid columns="3">
                         Id compte destination :
                         <h:inputText id="destination" size="3" value="#{transfert.destination}"
                                      required="true"
-                                     converterMessage="L'id est un nombre entier"
-                                     converter="compteBancaireConverter"/>
+                                     converterMessage="Le solde est un nombre entier"/>
                         <h:message for="destination"/>
-                        
+                    </h:panelGrid>
+                    <h:panelGrid columns="3">    
                         Montant : 
                         <h:inputText id="montant" size="3" value="#{transfert.montant}"
                                      required="true"
@@ -38,8 +38,6 @@
                     <h:commandButton id="update" value="Valider" action="#{transfert.update()}"/>
                 </h:form>
                 <h:messages/>
-                <h:message for="source_destination_null"/>
-                <h:message for="source_insuffisant"/>
             </ui:define>
 
         </ui:composition>

@@ -9,6 +9,7 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
+import java.io.Serializable;
 import mg.itu.tpbanquemalalanirinasarino.ejb.GestionnaireCompte;
 import mg.itu.tpbanquemalalanirinasarino.entities.CompteBancaire;
 
@@ -18,10 +19,10 @@ import mg.itu.tpbanquemalalanirinasarino.entities.CompteBancaire;
  */
 @Named(value = "transfert")
 @RequestScoped
-public class Transfert {
+public class Transfert implements Serializable {
 
-    private CompteBancaire source;
-    private CompteBancaire destination;
+    private Long source;
+    private Long destination;
     private int montant;
 
     @EJB
@@ -33,19 +34,19 @@ public class Transfert {
     public Transfert() {
     }
 
-    public CompteBancaire getSource() {
+    public Long getSource() {
         return source;
     }
 
-    public void setSource(CompteBancaire source) {
+    public void setSource(Long source) {
         this.source = source;
     }
 
-    public CompteBancaire getDestination() {
+    public Long getDestination() {
         return destination;
     }
 
-    public void setDestination(CompteBancaire destination) {
+    public void setDestination(Long destination) {
         this.destination = destination;
     }
 
@@ -59,23 +60,20 @@ public class Transfert {
 
     public String update() {
         boolean erreur = false;
-        if (source == null || destination == null) {
-            FacesMessage message
-                    = new FacesMessage("Le destinataire ou l'expediteur n'existe pas");
-            FacesContext.getCurrentInstance().addMessage("source_destination_null", message);
+        CompteBancaire compteSource = this.transfert.findById(source);
+        CompteBancaire compteDestination = this.transfert.findById(destination);
+        if (compteSource == null) {
+            Util.messageErreur("Aucun compte avec cet id !", "Aucun compte avec cet id !", "form:source");
             erreur = true;
         }
-        if (source.getSolde() < montant) {
-            FacesMessage message
-                    = new FacesMessage("Solde insuffisant");
-            FacesContext.getCurrentInstance().addMessage("source_insuffisant", message);
+         if (compteDestination == null) {
+             Util.messageErreur("Aucun compte avec cet id !", "Aucun compte avec cet id !", "form:destination");
             erreur = true;
         }
-
-        if (erreur) { // en cas d'erreur, rester sur la même page
+        if(erreur){
             return null;
         }
-        transfert.transferer(source, destination, montant);
+        this.transfert.transferer(compteSource, compteDestination, this.montant);
         // Message de succès ; addFlash à cause de la redirection.
         Util.addFlashInfoMessage("Transfert correctement effectué");
         return "listeComptes.xhtml?faces-redirect=true";
