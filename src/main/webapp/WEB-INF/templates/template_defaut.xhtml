@@ -19,7 +19,9 @@
         </div>
         <div>
             <div id="left">
-                <ui:include src="menu.xhtml"/>
+                <ui:include src="menu.xhtml"/>                
+                <h:messages globalOnly="true" infoStyle="color: green;"
+                        errorStyle="color: red;"/>
             </div>
             <div id="content" class="left_content">
                 <ui:insert name="content">Content</ui:insert>
