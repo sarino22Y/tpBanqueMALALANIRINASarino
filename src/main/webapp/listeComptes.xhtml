@@ -35,12 +35,20 @@
                             </f:facet>
                             <h:outputText value="#{item.nom}"/>
                         </p:column>
-                        <p:column sortBy="#{item.solde}" styleClass="centered" width="100">
+                        <p:column sortBy="#{item.solde}" styleClass="centered" width="80">
                             <f:facet name="header">
                                 <h:outputText value="Solde"/>
                             </f:facet>
                             <h:outputText value="#{item.solde}"/>
-                        </p:column>                    
+                        </p:column>
+                        <p:column style="text-align:right;" width="80" >
+                            <f:facet name="header">
+                                <h:outputText value="Opérations"/>
+                            </f:facet>
+                            <h:commandLink action="#{listeComptes.supprimerCompte(item)}" title="Supprimer le compte de #{item.nom}" >
+                                <h:graphicImage name="/images/del.png"/>
+                            </h:commandLink>
+                        </p:column>
                     </p:dataTable>
                 </h:form>
                 <h:messages/>
