@@ -71,24 +71,6 @@ public class AjoutCompte {
 
     // Créer un nouveau compte.
     public String action() {
-        boolean erreur = false;
-        if (nom == "") {
-            FacesMessage message
-                    = new FacesMessage("Le nom ne doit pas être vide");
-            FacesContext.getCurrentInstance().addMessage("nom_vide", message);
-            erreur = true;
-        }
-        if (solde < 0) {
-            FacesMessage message
-                    = new FacesMessage("Solde doit être positif");
-            FacesContext.getCurrentInstance().addMessage("solde_negatif", message);
-            erreur = true;
-        }
-
-        if (erreur) { // en cas d'erreur, rester sur la même page
-            return null;
-        }
-
         compteBancaire = new CompteBancaire(nom, solde);
         gCompte.creerCompte(compteBancaire);
         // Message de succès ; addFlash à cause de la redirection.
