@@ -55,7 +55,7 @@ public class GestionnaireCompte {
         Long nb = query.getSingleResult();
         return nb.intValue();
     }
-    
+
     public void transferer(CompteBancaire source, CompteBancaire destination,
             int montant) {
         source.retirer(montant);
@@ -66,5 +66,27 @@ public class GestionnaireCompte {
 
     public CompteBancaire update(CompteBancaire compteBancaire) {
         return em.merge(compteBancaire);
+    }
+
+    /**
+     * Dépôt d'argent sur un compte bancaire.
+     *
+     * @param compteBancaire
+     * @param montant
+     */
+    public void deposer(CompteBancaire compteBancaire, int montant) {
+        compteBancaire.deposer(montant);
+        update(compteBancaire);
+    }
+
+    /**
+     * Retrait d'argent sur un compte bancaire.
+     *
+     * @param compteBancaire
+     * @param montant
+     */
+    public void retirer(CompteBancaire compteBancaire, int montant) {
+        compteBancaire.retirer(montant);
+        update(compteBancaire);
     }
 }

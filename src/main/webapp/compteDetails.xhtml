@@ -14,19 +14,45 @@
 
         <ui:composition template="./WEB-INF/templates/template_defaut.xhtml">
 
+            <ui:define name="metadata">
+                <f:metadata>  
+                    <f:viewParam name="id" value="#{compteDetails.id}"  
+                                 required="true"/>  
+                    <f:viewAction action="#{compteDetails.loadCompte}"/>  
+                </f:metadata>
+            </ui:define>
+
             <ui:define name="top">
-                Détails
+                Mouvement sur un compte
             </ui:define>
 
             <ui:define name="content">
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="Id:" for="id" />
-                    <h:inputText id="nom" size="3" value="#{compteDetails.id}" readonly="true"/>
-                    <h:outputLabel value="Nom:" for="nom" />
-                    <h:inputText id="nom" size="3" value="#{compteDetails.nom}"/>
-                    <h:outputLabel value="Solde" for="solde" />
-                    <h:inputText id="solde" size="3" value="#{compteDetails.solde}"/>
-                </h:panelGrid>
+                <h1>Mouvement sur le compte de #{compteDetails.compte.nom}</h1>
+
+                <h:form>
+                    <h:panelGrid columns="3">
+                        Nom du titulaire :
+                        <h:outputText value="#{compteDetails.compte.nom}"/>
+                        <h:panelGroup/>
+                        Type du mouvement :
+                        <h:selectOneRadio id="typeMouvement"
+                                          value="#{compteDetails.typeMouvement}"
+                                          required="true"
+                                          layout="pageDirection">
+                            <f:selectItem itemValue="ajout" itemLabel="Ajout"/>
+                            <f:selectItem itemValue="retrait" itemLabel="Retrait"/>
+                        </h:selectOneRadio>
+                        <h:message for="typeMouvement"/>
+
+                        Montant du mouvement :
+                        <h:inputText id="montant" value="#{compteDetails.montant}"
+                                     required="true"
+                                     validator="#{compteDetails.validateSolde}"/>
+                        <h:message for="montant"/>
+                    </h:panelGrid>
+                    <h:commandButton action="#{compteDetails.enregistrerMouvement()}"
+                                     value="Enregistrer le mouvement"/>
+                </h:form>
             </ui:define>
 
         </ui:composition>
