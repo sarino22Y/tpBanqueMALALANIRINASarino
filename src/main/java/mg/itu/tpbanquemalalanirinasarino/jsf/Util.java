@@ -9,7 +9,7 @@ import jakarta.faces.context.Flash;
 
 /**
  *
- * @author Ibonia
+ * @author Sarino
  */
 /**
  * Classe utilitaire pour JSF.

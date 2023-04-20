@@ -15,28 +15,28 @@ import mg.itu.tpbanquemalalanirinasarino.entities.CompteBancaire;
  *
  * @author Sarino
  */
-@Named(value = "modification")
+@Named(value = "listeOperations")
 @ViewScoped
-public class Modification implements Serializable {
+public class ListeOperations implements Serializable {
 
-    private long id;
+    private Long idCompte;
     private CompteBancaire compte;
 
     @EJB
-    private GestionnaireCompte gCompte;
+    private GestionnaireCompte gestionnaireCompte;
 
     /**
-     * Creates a new instance of ModificationBean
+     * Creates a new instance of ListeOperations
      */
-    public Modification() {
+    public ListeOperations() {
     }
 
-    public long getId() {
-        return id;
+    public Long getIdCompte() {
+        return idCompte;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdCompte(Long idCompte) {
+        this.idCompte = idCompte;
     }
 
     public CompteBancaire getCompte() {
@@ -48,13 +48,7 @@ public class Modification implements Serializable {
     }
 
     public void loadCompte() {
-        this.compte = gCompte.findById(id);
-    }
-
-    public String update() {
-        gCompte.update(compte);
-        Util.addFlashInfoMessage("Modifications enregistrées");
-        return "modifierNomCompte?id=" + id + "&amp;faces-redirect=true";
+        this.compte = gestionnaireCompte.findById(idCompte);
     }
 
 }

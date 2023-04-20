@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/templates/template_defaut.xhtml">
+
+            <ui:define name="metadata">
+                <f:metadata>
+                    <f:viewParam name="id" 
+                                 converter="compteBancaireConverter" 
+                                 value="#{listeOperations.compte}" 
+                                 required="true"/>
+                </f:metadata>
+            </ui:define>
+
+            <ui:define name="top">
+                Opérations bancaires
+            </ui:define>
+
+            <ui:define name="content">
+                <h1>Historique des opérations bancaires sur le compte de #{listeOperations.compte.nom}</h1>
+                <h:form>
+                    <p:dataTable value="#{listeOperations.compte.operations}"
+                                 var="item"
+                                 paginator="true"
+                                 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} ">
+                        <p:column sortBy="#{item.description}" filterBy="#{item.description}">
+                            <f:facet name="header">
+                                <h:outputText value="Description"/>
+                            </f:facet>
+                            <h:outputText value="#{item.description}"/>
+                        </p:column>
+                        <p:column style="text-align:right;" sortBy="#{item.dateOperation}" >
+                            <f:facet name="header">
+                                <h:outputText value="Date opération"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateOperation}">
+                                <f:convertDateTime type="localDateTime" pattern="dd/mm/yyyy hh:mm:ss"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column style="text-align:right;"
+                                  sortBy="#{item.montant}">
+                            <f:facet name="header">
+                                <h:outputText value="Montant"/>
+                            </f:facet>
+                            <h:outputText value="#{item.montant}">
+                                <f:convertNumber pattern="###,###,##0"/>
+                            </h:outputText>                            
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

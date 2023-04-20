@@ -18,7 +18,7 @@ import mg.itu.tpbanquemalalanirinasarino.entities.CompteBancaire;
 
 /**
  *
- * @author Ibonia
+ * @author Sarino
  */
 @Named(value = "compteDetails")
 @ViewScoped

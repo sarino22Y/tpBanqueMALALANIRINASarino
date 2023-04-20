@@ -50,6 +50,14 @@
                             </h:commandLink><br></br>
                             <h:link outcome="modifierNomCompte?id=#{item.id}" value="Modifier le nom"/>
                         </p:column>
+                        <p:column style="text-align:right;" width="80" >
+                            <f:facet name="header">
+                                <h:outputText escape="false" value="Historique&lt;br/>opérations"/>
+                            </f:facet>
+                            <h:link outcome="operations" value="Détails">
+                                <f:param name="id" value="#{item.id}"/>
+                            </h:link>
+                        </p:column>
                     </p:dataTable>
                 </h:form>
                 <h:messages/>
