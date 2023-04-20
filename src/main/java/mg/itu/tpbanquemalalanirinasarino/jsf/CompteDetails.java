@@ -17,6 +17,7 @@ import jakarta.persistence.OptimisticLockException;
 import java.io.Serializable;
 import mg.itu.tpbanquemalalanirinasarino.ejb.GestionnaireCompte;
 import mg.itu.tpbanquemalalanirinasarino.entities.CompteBancaire;
+import mg.itu.tpbanquemalalanirinasarino.exception.ConcurrentAccessException;
 
 /**
  *
@@ -90,9 +91,17 @@ public class CompteDetails implements Serializable {
     public String enregistrerMouvement() {
         try {
             if (typeMouvement.equals("ajout")) {
-                gestionnaireCompte.deposer(compte, montant);
+                try {
+                    gestionnaireCompte.deposer(compte, montant);
+                } catch (ConcurrentAccessException ex) {
+                    Util.addFlashErrorMessage(ex.getMessage());
+                }
             } else {
-                gestionnaireCompte.retirer(compte, montant);
+                try {
+                    gestionnaireCompte.retirer(compte, montant);
+                } catch (ConcurrentAccessException ex) {
+                    Util.addFlashErrorMessage(ex.getMessage());
+                }
             }
             Util.addFlashInfoMessage(typeMouvement + " de " + montant
                     + " enregistré sur compte de " + compte.getNom());
